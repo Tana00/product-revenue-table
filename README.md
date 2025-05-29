@@ -1,47 +1,41 @@
-# Supermarket revenue aggregator component
+# Supermarket Revenue Aggregator
 
-You are creating a supermarket branch revenue aggregator. It's a React-based web application which displays a list of products from multiple supermarket branches in a table that is sorted, filterable and displays the total revenue from all branches.
+This is a React-based component that aggregates product sales from three supermarket branches and displays the data in a searchable, sortable table. Each row shows a product and its total revenue (across branches), and there's a total sum at the bottom that updates as you filter.
 
-## Setup
+## Features
 
-To get started:
+- Fetches data from three static JSON files: `branch1.json`, `branch2.json`, and `branch3.json`
+- Aggregates revenue per product across all branches
+- Sorts the table alphabetically by product name
+- Provides case-insensitive search functionality to filter the list
+- Calculates total revenue dynamically based on the filtered view
+- Uses consistent number formatting with the provided `formatNumber` function
+- Ensures search input is inline with its label and screen-reader friendly
+- Passes all provided tests
 
-1. `npm i` – install the dependencies
-2. `npm test` – run all tests in watch mode (the tests will fail until you implement the app)
-3. `npm start` – view the app running at [http://localhost:3000/](http://localhost:3000/)
+## Getting Started
 
-# Tasks
+```bash
+npm install     # Install dependencies
+npm test        # Run all tests in watch mode
+npm start       # Start the app at http://localhost:3000
+```
 
-- Request the data from 'api/branch{1, 2, 3}.json' and render it inside the table, where each row contains two columns: product name and total revenue from sales of the product.
-- Branches may sell the same products, so you need to aggregate (sum) the revenue per branch
-- The table should be sorted alphabetically by product name
-- The table can be filtered by product name, the filter should be case insensitive
-- At the bottom of the table the total revenue is shown for all the products that are displayed, i.e. if you filter the table, the total needs to update
-- You should use the provided `formatNumber` function to display numbers
-- You need to get all of the tests passing
-- Make sure Search input is inline with the label and working, could this be more accessible?
+## Technical Details
 
-# Notes
+### Data Management
 
-- You don't need to make branch data loading dynamic, you can hardcode the json names
-- You don't need to display partial data, you can wait for all data to load first
-- Make sure you are happy with the complete solution and it's done to the best of your ability
-- The app only needs to work on the latest version Chrome
+- Data is fetched from static JSON files (no backend required)
+- The table only renders after all data is loaded
+- Designed for modern browsers (tested in latest Chrome)
 
-# Solution Summary
+### Performance Optimizations
 
-This solution prioritizes accessibility, performance optimization via memoization, and test compliance. I’ve used semantic markup and ensured the UI gracefully handles edge cases like empty results.
+- Uses `useMemo` to memoize filtered products and total revenue
+- Branch data is fetched once using `useEffect` and aggregated efficiently
 
-# Solution Details
+### Accessibility Features
 
-## Performance
-
-- Used useMemo to memoize filtered products and total revenue calculations
-- Used useEffect to fetch data only once
-- Used useEffect to fetch data only once
-
-## Accessibility
-
-- Added aria-label to search input for better screen reader support
-- Used semantic table structure for better accessibility
-- Added role="searchbox" to search input for better accessibility
+- Search input is linked to its label using `htmlFor`
+- Added `aria-label` and `role="searchbox"` for assistive technologies
+- Displays a message when no products match the filter
